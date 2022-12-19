@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:14
+    networks:
+      - outbox
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: "outbox"
+      POSTGRES_PASSWORD: "outbox"
+      POSTGRES_DB: "outbox"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - "postgres-data:/var/lib/postgresql/data/pgdata"      
+      
+networks:
+  outbox: {}
+
+volumes:
+  postgres-data: {}
